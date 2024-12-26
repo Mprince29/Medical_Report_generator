@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Account</title>
+    <link rel="stylesheet" href="create_account.css">
+    <script src="create_account.js"></script>
+
+</head>
+<body>
+    <div class="account-container">
+        <h1>Create New Account</h1>
+        <form action="#" method="post">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+
+            <button type="submit">Create Account</button>
+        </form>
+
+        <div class="social-login">
+            <button onclick="socialSignUp('Gmail')">Sign Up with Gmail</button>
+        </div>
+
+        <button onclick="redirectToLogin()">Back to Login</button>
+    </div>
+</body>
+</html>
