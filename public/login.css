@@ -1,0 +1,215 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: rgba(244, 249, 250, 0.85); /* Light overlay */
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(5px); /* Slight blur for subtle effect */
+    transition: background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Logo container for the left */
+.logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Logo styling and animation */
+.logo {
+    width: 120px;
+    height: auto;
+    animation: bounce 2s infinite;
+}
+/* Bounce animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Sweet line styling */
+.welcome-message {
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    font-size: 30px; /* Larger font */
+    color: #1e4a6f;
+    font-weight: bold;
+    padding: 15px 25px;
+    border-radius: 12px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    animation: slideIn 1.2s ease-in-out;
+    font-family:'Times New Roman', Times, serif;
+}
+
+/* Container for the login form */
+.login-container {
+    background: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 450px;
+    margin-right: 50px;
+    align-self: flex-end;
+    transform: translateY(20px);
+    animation: popIn 0.8s ease-in-out;
+}
+
+/* Heading Styling */
+.login-container h1 {
+    margin-bottom: 15px;
+    font-size: 40px; /* Larger font size */
+    color: #1e4a6f;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.login-container h2 {
+    margin-bottom: 25px;
+    font-size: 22px; /* Larger font size */
+    color: #0077b6;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Input Fields Styling */
+.login-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #5d6b78;
+    font-size: 16px; /* Slightly larger font */
+}
+
+.login-container input[type="email"],
+.login-container input[type="password"],
+.login-container input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #b0c4d1;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px; /* Larger input text */
+    background-color: #f9f9f9;
+}
+
+/* Input Fields focus effect */
+.login-container input[type="email"]:focus,
+.login-container input[type="password"]:focus,
+.login-container input[type="tel"]:focus {
+    border-color: #0077b6;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 119, 182, 0.3);
+}
+
+/* Button Styling */
+.login-container button {
+    width: 100%;
+    padding: 14px;
+    background: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px; /* Larger font size */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+/* Button Hover Effect */
+.login-container button:hover {
+    background: #005f8d;
+    transform: translateY(-3px);
+}
+
+/* Extra Links Styling */
+.extra-links {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.extra-links a {
+    color: #0077b6;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 16px; /* Larger font */
+    margin: 0 10px;
+}
+
+.extra-links a:hover {
+    color: #005f8d;
+}
+
+/* Animation for fade-in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Animation for slide-in */
+@keyframes slideIn {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Animation for pop-in effect */
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .login-container {
+        padding: 25px;
+        max-width: 100%;
+    }
+
+    .login-container h1 {
+        font-size: 26px;
+    }
+
+    .login-container input[type="email"],
+    .login-container input[type="password"],
+    .login-container input[type="tel"] {
+        padding: 12px;
+    }
+
+    .login-container button {
+        font-size: 14px;
+    }
+}

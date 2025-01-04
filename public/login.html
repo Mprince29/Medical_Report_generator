@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="luchkee_health_Logo_bg.png" alt="Logo" class="logo">
+    </div>
+    <p class="welcome-message">Welcome to Luchkee Healthcare Pvt. Ltd.<br> &nbsp;We care for your health and well-being!</p>
+
+    <div class="login-container">
+        <h1>Login</h1>
+        <h2>Please enter your details</h2>
+       
+        <!-- Message Container -->
+        <div id="messageContainer" class="message-container" style="display: none;">
+            <p id="messageText"></p>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="spinner" style="display: none;">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Email Login -->
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="username" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="Enter your password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <!-- Phone Login -->
+        <form id="phoneLoginForm">
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="10-digit number" required>
+            </div>
+            <button type="submit" class="login-button">Login with Phone</button>
+        </form>
+
+        <!-- Extra Links -->
+        <div class="extra-links">
+            <a href="#" onclick="forgotPassword()" class="forgot-link">Forgot Password?</a>
+            <a href="create_account.html" class="register-link">Create Account</a>
+        </div>
+    </div>
+    <script src="login_page.js" defer></script>
+</body>
+</html>

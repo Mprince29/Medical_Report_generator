@@ -48,7 +48,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Added spacing between buttons */
 }
 .login-container button:hover {
     background: #0056b3;
@@ -67,23 +67,20 @@ body {
 }
 .social-login {
     display: flex;
-    justify-content: center; /* Center align buttons */
-    gap: 10px; /* Add spacing between buttons */
+    justify-content: space-between;
     margin-bottom: 15px;
-    position: relative;
-    align-items: center;
 }
 .social-login button {
     width: 32%;
-    background-color: #ac0707;
-    color: #ffffff;
+    background-color: #f3f4f6;
+    color: #555;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 10px;
     cursor: pointer;
     font-size: 14px;
-    margin: 0 5px;
+    margin: 0 5px; /* Added spacing between social buttons */
 }
 .social-login button:hover {
-    background-color: #4a0303;
+    background-color: #e2e6ea;
 }

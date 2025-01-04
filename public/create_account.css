@@ -1,0 +1,182 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f9fa; /* Light, calm background */
+    transition: background-color 0.3s ease;
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(6px);
+}
+
+/* Logo container for top-left alignment */
+.logo-container {
+    position: absolute;
+    top: 20px; /* Distance from the top */
+    left: 20px; /* Distance from the left */
+}
+
+/* Logo styling and animation */
+.logo {
+    width: 100px;
+    height: auto;
+    animation: bounce 2s infinite;
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Welcome Message Styling */
+.welcome-message {
+    position: absolute;
+    top: 50px;
+    left: 550px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1e4a6f;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transform: translateY(-50%);
+    animation: fadeIn 1s ease;
+}
+
+/* Account Container */
+.account-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px; /* Rounded corners for a soft look */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    transform: translateY(20px);
+    animation: slideIn 0.7s ease-out;
+}
+
+/* Heading Styling */
+.account-container h1 {
+    margin-bottom: 25px;
+    font-size: 35px;
+    color: #1e4a6f; /* Deep blue for healthcare trust */
+    text-align: center;
+    font-weight: 800;
+    animation: fadeIn 1s ease;
+}
+
+/* Input Fields Styling */
+.account-container .form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #5d6b78; /* Soft gray for legibility */
+    font-size: 14px;
+}
+
+.account-container .form-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #b0c4d1; /* Light blue border for healthcare vibe */
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9; /* Soft background */
+}
+
+/* Input Fields focus effect */
+.account-container .form-input:focus {
+    border-color: #0077b6; /* Healthcare blue */
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 119, 182, 0.3); /* Soft blue glow */
+}
+
+/* Button Styling */
+.account-container .submit-button {
+    width: 100%;
+    padding: 14px;
+    background: #0077b6; /* Healthcare blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+/* Button Hover Effect */
+.account-container .submit-button:hover {
+    background: #005f8d; /* Darker blue on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+}
+
+.account-container .back-button {
+    width: 100%;
+    padding: 14px;
+    background: #f2f2f2; /* Light gray */
+    color: #0077b6; /* Healthcare blue */
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.account-container .back-button:hover {
+    background: #e0e0e0; /* Darker gray */
+}
+
+/* Animation for fade-in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Animation for slide-in */
+@keyframes slideIn {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .account-container {
+        padding: 25px;
+        max-width: 100%;
+    }
+
+    .account-container h1 {
+        font-size: 26px;
+    }
+
+    .account-container .form-input {
+        padding: 12px;
+    }
+
+    .account-container .submit-button {
+        font-size: 14px;
+    }
+}

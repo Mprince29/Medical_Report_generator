@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Account</title>
+    <link rel="stylesheet" href="create_account.css">
+</head>
+<body class="background">
+    <!-- Logo Section -->
+    <div class="logo-container">
+        <img src="luchkee_health_Logo_bg.png" alt="Luchkee Logo" class="logo">
+    </div>
+
+    <!-- Welcome Message -->
+    <div class="welcome-message">
+        Welcome to Luchkee Healthcare Pvt. Ltd.<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your health, our priority!
+    </div>
+
+    <!-- Account Creation Form -->
+    <div class="account-container">
+        <h1>Create New Account</h1>
+
+        <form id="signup-form">
+            <div>
+                <label for="username" class="form-label">Email:</label>
+                <input type="email" id="username" name="username" required class="form-input">
+                <div id="username-error" class="error-message"></div>
+            </div>
+
+            <div>
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" id="password" name="password" required class="form-input">
+                <div id="password-error" class="error-message"></div>
+            </div>
+
+            <div>
+                <label for="phone" class="form-label">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required class="form-input">
+                <div id="phone-error" class="error-message"></div>
+            </div>
+
+            <button type="submit"  id="submit-btn" class="submit-button">Create Account</button>
+        </form>
+
+        <button onclick="window.location.href='login.html'" class="back-button">Back to Login</button>
+    </div>
+
+    <script src="create_account.js"></script>
+</body>
+</html>
