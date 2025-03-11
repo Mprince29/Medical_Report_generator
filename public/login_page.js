@@ -22,6 +22,55 @@ function showMessage(message, isError = false) {
         messageContainer.style.display = 'none';
     }, 5000);
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.getElementById("loginForm");
+    
+    if (loginForm) {
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            console.log("Login button clicked");
+            
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (!username || !password) {
+                showMessage("Please enter both username and password", true);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include', // Important for sending cookies
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Store token and user info
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+
+                    showMessage("Login successful! Redirecting...");
+                    
+                    // Use redirectUrl from server response
+                    setTimeout(() => {
+                        window.location.href = data.redirectUrl || 'Luchkee Dashboard.html';
+                    }, 1500);
+                } else {
+                    showMessage(data.error || "Login failed", true);
+                }
+            } catch (error) {
+                console.error("Login error:", error);
+                showMessage("Connection error. Please try again", true);
+            }
+        });
+    }
+});
 
 // Email Login Form Handler
 document.addEventListener("DOMContentLoaded", () => {
@@ -48,7 +97,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             showMessage("Login successful! Redirecting...");
             localStorage.setItem('user', JSON.stringify(data.user));
             setTimeout(() => {
-                window.location.href = '/dashboard.html';
+                window.location.href = 'Luchkee Dashboard.html';
             }, 1500);
         } else {
             const errorData = await response.json();
@@ -149,7 +198,7 @@ async function verifyOTP(phone) {
           showMessage("Login successful! Redirecting...");
           localStorage.setItem('user', JSON.stringify(data.user));
           setTimeout(() => {
-              window.location.href = '/dashboard.html';
+              window.location.href = 'Luchkee Dashboard.html';
           }, 1500);
       } else {
           const errorData = await response.json();

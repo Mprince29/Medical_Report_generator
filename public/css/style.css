@@ -110,6 +110,9 @@ a:focus {
 
 .header_section .header_bottom {
   background-color: #114d78;
+  height: 60px; /* Adjust this to your preferred height */
+  display: flex;
+  align-items: center;
 }
 
 .header_section .header_bottom .container-fluid {
@@ -119,12 +122,17 @@ a:focus {
 
 .navbar-brand {
   background-color: #ffffff;
-  padding: 15px 15px;
+  padding: 5px 5px;
+  display: flex;
+  align-items: center; /* Keep the navbar height unchanged */
+  padding: 5px; /* Ensure padding doesn't affect height */
 }
 
 .navbar-brand img {
-  width: 55px;
-  size: 50px;
+  width: 80px; /* Increase image width */
+  height: 80px; /* Increase image height */
+  max-height: 80px; /* Restrict max height */
+  object-fit: contain; /* Prevent distortion */
 }
 
 .custom_nav-container {
@@ -702,11 +710,10 @@ a:focus {
 .info_section .info_top .info_logo a {
   display: block;
   background-color: #ffffff;
-  padding: 20px 35px;
 }
 
 .info_section .info_top .info_logo a img {
-  width: 55px;
+  width: 80px;
 }
 
 .info_section .info_form {
@@ -800,11 +807,6 @@ a:focus {
 .info_section .info_links .info_links_menu a:not(:nth-last-child(1)) {
   margin-bottom: 10px;
 }
-
-.info_section .info_links .info_links_menu a:hover, .info_section .info_links .info_links_menu a.active {
-  color: #114d78;
-}
-
 .info_section .info_post .post_box {
   display: -webkit-box;
   display: -ms-flexbox;

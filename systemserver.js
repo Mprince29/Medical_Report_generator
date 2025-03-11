@@ -8,7 +8,6 @@ const jwt = require("jsonwebtoken");
 const session = require('express-session'); // Add this line
 const fs = require('fs'); // Add this line for file operations
 const JWT_SECRET = "your-secret-key"; // In production, use environment variable
-const { app: electronApp } = require('electron');
 const app = express();
 const otpStore = {}; // Initialize an empty object to store OTPs
 
@@ -90,14 +89,6 @@ db.on("error", (err) => {
 connectDatabase()
   .then(() => console.log("Database ready for queries."))
   .catch((err) => console.error("Initial database connection failed:", err));
-
-// Gracefully handle shutdown inside Electron
-if (electronApp) {
-  electronApp.on('quit', () => {
-      console.log("Shutting down server...");
-      process.exit(0);
-  });
-}
 
 // Input validation middleware
 const validateUserInput = (req, res, next) => {
@@ -797,8 +788,23 @@ app.put("/api/report/:visitId", (req, res) => {
   );
 });
 
+app.get("/api/get-report/:visitId", (req, res) => {
+  const { visitId } = req.params;
+  const pdfPath = path.join(__dirname, "reports", `${visitId}.pdf`);
+
+  // ✅ Ensure file exists and serve updated version
+  if (fs.existsSync(pdfPath)) {
+      res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+      res.setHeader("Expires", "0");
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Content-Type", "application/pdf");
+      res.sendFile(pdfPath);
+  } else {
+      res.status(404).json({ error: "PDF report not found" });
+  }
+});
 
 const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT, '127.0.0.1', () => {
+  console.log("✅ Server running on http://127.0.0.1:3000");
 });

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="systemluchkeedashboad.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+
+
+</head>
+<body>
+    <!-- Overlay for Modal Background -->
+    <div id="modalOverlay" class="modal-overlay"></div>
+
+    <!-- Navigation Sidebar -->
+    <div class="sidebar">
+        <div class="logo" id="refreshPage">
+            <i class="fas fa-hospital-alt"></i>
+            <span class="logo-text">Luchkee</span>
+        </div>
+        <div class="nav-links">
+            <div class="nav-item active" data-section="newEntry">
+                <i class="fas fa-plus-circle"></i>
+                <span>New Entry</span>
+            </div>
+            <div class="nav-item" data-section="addTests">
+                <i class="fas fa-vial"></i>
+                <span>Add Tests</span>
+            </div>
+            <div class="nav-item" data-section="viewReports">
+                <i class="fas fa-file-medical"></i>
+                <span>View Reports</span>
+            </div>
+            <div class="nav-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- New Entry Section -->
+        <section id="newEntry" class="content-section active">
+            <div class="section-header">
+                <h1><i class="fas fa-plus-circle"></i> New Patient Entry</h1>
+            </div>
+
+            <div class="entry-container">
+                <!-- Patient Information Form -->
+                <div class="entry-form card-animate">
+                    <h2>Patient Information</h2>
+                    <div class="form-group">
+                        <label>Visit ID</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-fingerprint"></i>
+                            <input type="text" id="visitId" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Patient Name</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="patientName" placeholder="Enter patient name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Age/Gender</label>
+                        <div class="age-gender-container">
+                            <div class="input-group">
+                                <input type="number" id="patientAge" class="age-input" placeholder="Age" min="0" max="150">
+                                <select id="patientGender" class="gender-select">
+                                    <option value="">Select Gender</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="contactNumber" pattern="[0-9]{10}" placeholder="Enter 10-digit number">
+                        </div>
+                    </div>
+                </div>
+                
+
+                <!-- Doctor and Dates Information -->
+                <div class="entry-form card-animate">
+                    <h2>Doctor & Report Information</h2>
+                    <div class="form-group doctor-section">
+                        <label>Referring Doctor</label>
+                        <div class="input-with-icon">
+                            <input type="text" id="doctorName" class="doctor-input" placeholder="Enter doctor's name">
+                            <span class="doctor-prefix">Dr.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Reported Date</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar-plus"></i>
+                            <input type="date" id="reportedDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Collection Date</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-calendar-check"></i>
+                            <input type="date" id="collectionDate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tests Selection Section -->
+            <div class="tests-container">
+                <div class="tests-list card-animate">
+                    <h2><i class="fas fa-vial"></i> Available Tests</h2>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchTests" placeholder="Search tests...">
+                    </div>
+                    <div id="availableTests" class="tests-grid"></div>
+                </div>
+
+                <div class="tests-list card-animate">
+                    <h2><i class="fas fa-clipboard-check"></i> Selected Tests</h2>
+                    <div id="selectedTests" class="tests-grid"></div>
+                </div>
+            </div>
+            <div class="test-results-entry-section card-animate">
+                <h2><i class="fas fa-file-medical-alt"></i> Enter Test Results</h2>
+                <div id="selectedTestResultsContainer"></div>
+            </div>
+
+            <!-- Total Calculation Section -->
+            <div class="total-section card-animate">
+                <div class="total-row">
+                    <span>Subtotal</span>
+                    <span id="subtotalAmount">₹0.00</span>
+                </div>
+                <div class="total-row">
+                    <span>Discount</span>
+                    <div class="input-with-icon">
+                        <input type="number" id="discountInput" min="0" max="100" value="0">
+                        <span class="unit">%</span>
+                    </div>
+                </div>
+
+                <!-- Tax Section -->
+                <div class="tax-section">
+                    <div class="tax-input-group">
+                        <label>CGST (%)</label>
+                        <input type="number" id="cgstInput" class="tax-input" min="0" max="100" value="0">
+                        <span id="cgstAmount" class="amount-display">₹0.00</span>
+                    </div>
+                    <div class="tax-input-group">
+                        <label>SGST (%)</label>
+                        <input type="number" id="sgstInput" class="tax-input" min="0" max="100" value="0">
+                        <span id="sgstAmount" class="amount-display">₹0.00</span>
+                    </div>
+                    <div class="tax-input-group">
+                        <label>IGST (%)</label>
+                        <input type="number" id="igstInput" class="tax-input" min="0" max="100" value="0">
+                        <span id="igstAmount" class="amount-display">₹0.00</span>
+                    </div>
+                </div>
+
+                <div class="total-row grand-total">
+                    <span>Grand Total</span>
+                    <span id="grandTotal">₹0.00</span>
+                </div>
+
+                <button id="saveEntry" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save Entry
+                </button>
+            </div>
+        </section>
+
+        <!-- Add Tests Section -->
+        <section id="addTests" class="content-section">
+            <div class="section-header">
+                <h1><i class="fas fa-vial"></i> Manage Tests</h1>
+            </div>
+            <div class="add-test-form card-animate">
+                <h2>Add New Test</h2>
+                <form id="newTestForm">
+                    <div class="form-group">
+                        <label>Test Name</label>
+                        <input type="text" id="newTestName" placeholder="Enter test name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Price (₹)</label>
+                        <input type="number" id="newTestPrice" min="0" placeholder="Enter price" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Normal Range</label>
+                        <input type="text" id="newTestRange" placeholder="Enter normal range">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="newTestCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Blood Test">Blood Test</option>
+                            <option value="Urine Test">Urine Test</option>
+                            <option value="Imaging">Imaging</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="newTestDescription" placeholder="Enter test description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Test
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Edit Test Modal -->
+        <div id="editTestModal" class="modal-overlay">
+            <div class="modal">
+                <h2>Edit Test</h2>
+                <form id="editTestForm">
+                    <input type="hidden" id="editTestId">
+                    <label>Test Name</label>
+                    <input type="text" id="editTestName" required>
+
+                    <label>Price (₹)</label>
+                    <input type="number" id="editTestPrice" required>
+
+                    <label>Normal Range</label>
+                    <input type="text" id="editTestRange">
+
+                    <label>Category</label>
+                    <input type="text" id="editTestCategory">
+
+                    <label>Description</label>
+                    <textarea id="editTestDescription"></textarea>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+       <!-- View Reports Section -->
+<section id="viewReports" class="content-section">
+    <div class="section-header">
+        <h1><i class="fas fa-file-medical"></i> View Reports</h1>
+    </div>
+
+    <div class="search-reports card-animate">
+        <div class="form-group">
+            <label>Search Reports</label>
+            <div class="input-with-icon">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchReports" placeholder="Search by Visit ID or Patient Name">
+                <iframe id="pdfPreview" width="100%" height="600px" style="border: none;"></iframe>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Centering Container -->
+    <div class="reports-container">
+        <div id="reportsGrid" class="reports-grid">
+            <!-- Example Report Card Template -->
+            <div class="report-card">
+                <div class="report-header">
+                    <div class="visit-id">LH1001</div>
+                    <div class="patient-name">Master Prince</div>
+                </div>
+                <div class="report-actions">
+                    <button class="btn btn-edit">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="btn btn-download">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<script type="module" src="systemluchkeedasgboard.js"></script>
+
+    
+</body>
+</html>
