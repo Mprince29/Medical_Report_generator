@@ -1,6 +1,7 @@
 {
   "name": "medical_report_generator",
   "version": "0.1.0",
+  "homepage": "https://mprince29.github.io/Medical_Report_generator/",
   "private": true,
   "main": "main.js",
   "dependencies": {
@@ -14,7 +15,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-start": "electron ."
+    "electron-start": "electron .",
+    "predeploy": "npm run build",
+"deploy": "gh-pages -d build"
+
   },
   "eslintConfig": {
     "extends": [
