@@ -1,70 +1,148 @@
-# Getting Started with Create React App
+🧬 Diagnostics Management System 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack diagnostics and patient management platform for clinical labs or hospitals. Built with Node.js, Express.js, MySQL, and integrated into a desktop interface via Electron.js, this system provides real-time test management, OTP-based login, JWT authentication, and billing/reporting functionality.
 
-## Available Scripts
+✨ Features
 
-In the project directory, you can run:
+🧪 Medical Test Management (CRUD)
 
-### `npm start`
+👩‍⚕️ Patient Visit & Test Record Keeping
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+📄 Comprehensive Report Generation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+📊 Dynamic Billing System (with tax calculations)
 
-### `npm test`
+🔐 Secure Auth System:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Email/password login
 
-### `npm run build`
+OTP-based phone login
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+JWT token + session-based auth
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+📬 Contact Form Submission (stored in DB)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+🧠 Input Validation & Error Handling
 
-### `npm run eject`
+💻 Electron App Integration
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+🔎 Search API for reports
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+🚀 Ready for Full Deployment
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+⚙️ Tech Stack
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Backend: Node.js, Express.js
 
-## Learn More
+Frontend: HTML, CSS (served via Express static files)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Database: MySQL (user_management)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Desktop: Electron.js
 
-### Code Splitting
+Auth: JWT + Sessions + Bcrypt for hashing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Others: CORS, Body-Parser, dotenv, file system (fs)
 
-### Analyzing the Bundle Size
+📁 Folder Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+├── public/
 
-### Making a Progressive Web App
+│   ├── Luchkee_homepage.html
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+│   ├── Luchkee Dashboard.html
 
-### Advanced Configuration
+│   └── Login.html
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+├── server.js
 
-### Deployment
+├── package.json
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+└── README.md
 
-### `npm run build` fails to minify
+🔐 Authentication
+Manual Signup/Login using:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+POST /signup with email, phone, password
+
+POST /login with email & password
+
+OTP Login via:
+
+POST /request-otp (send OTP to phone)
+
+POST /verify-otp (verify OTP + login)
+
+Authenticated users can access protected routes like /dashboard, /api/tests, etc.
+
+📋 API Endpoints
+
+Method	Endpoint	Description
+
+GET	/dashboard	Dashboard view with session user
+
+POST	/signup, /login	Manual user authentication
+
+POST	/request-otp, /verify-otp	Phone number based OTP login
+
+POST	/contact	Contact form submission
+
+GET	/api/tests	Fetch medical test list
+
+PUT	/api/tests/:id	Update medical test info
+
+POST	/api/patients	Add patient + tests + billing
+
+GET	/api/reports	Search reports (by name/ID)
+
+GET	/api/report/:visitId	View specific report with billing
+
+PUT	/api/report/:visitId	Update report details
+
+GET	/api/next-visit-id	Generate new visit ID like LH1001
+
+POST	/logout	Destroy session
+
+🔒 Security Notes
+Passwords are hashed with bcrypt
+
+JWT tokens are stored in both headers and session
+
+Input validation ensures:
+
+Valid email format
+
+Strong password (8+ characters)
+
+Valid phone number format
+
+⚙️ Setup & Installation
+1. Clone the Repository
+bash
+Copy
+Edit
+git clone https://github.com/your-username/diagnostics-management-system.git
+cd diagnostics-management-system
+2. Install Dependencies
+bash
+Copy
+Edit
+npm install
+3. Setup MySQL Database
+sql
+Copy
+Edit
+CREATE DATABASE user_management;
+-- Create tables: users, contact_submissions, patients, patient_tests, test_results, reference_ranges, patient_billing, medical_tests
+4. Start the Server
+bash
+Copy
+Edit
+node server.js
+
+🖥️ Electron Integration
+The backend is compatible with Electron. When used as an Electron app, it gracefully shuts down the server on app exit:
+
+👤 Author
+
+Master Prince
